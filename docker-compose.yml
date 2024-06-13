@@ -1,0 +1,35 @@
+
+services:
+  submission_service:
+    build: ./submission_service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./submission_service:/app
+    environment:
+      - FLASK_ENV=production
+    depends_on:
+      - redis
+
+  retrieval_service:
+    build: ./retrieval_service
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./retrieval_service:/app
+    environment:
+      - FLASK_ENV=production
+    depends_on:
+      - redis
+
+  redis:
+    image: "redis:alpine"
+
+  tests:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    depends_on:
+      - submission_service
+      - retrieval_service
+      - redis
