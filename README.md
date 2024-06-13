@@ -6,7 +6,7 @@ This project is a prototype for Markr, a data ingestion and processing microserv
 1. **Submission Service:** Importing exam results from an XML file via an HTTP POST request.
 2. **Retrieval Service:** Retrieving aggregated test results via an HTTP GET request.
 
-Two separate services have been created in two containers to assist with decoupling, this is for ease of management later, and scaleability when in production.
+Two separate microservices have been created in distinct containers to enhance flexibility, ease management, and improve scalability in production.
 
 ## Assumptions
 - The provided XML format may contain extraneous fields that can be ignored.
