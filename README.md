@@ -1,5 +1,5 @@
 # Markr - Marking as a Service with Redis
-#### Note: Built with the assistance of Copilot and chatGPT, concept of approach is my own. 
+#### Note: I completed the solution by combining my knowledge of Python, Flask, Docker, and what I remembered about Redis with additional insights and assistance from GPT-4. The intention of this was to allow me to quickly validate ideas, get back up to speed fairly quickly, and ensure I was following best practices. I’m happy to walk through the code and decisions made, demonstrating my understanding and how I effectively used GPT-4 as a supplementary resource. 
 
 ## Overview
 This project is a prototype for Markr, a data ingestion and processing microservice for analyzing student performance on multiple-choice exams. It uses Redis for storing and retrieving data. The project is split into two services:
