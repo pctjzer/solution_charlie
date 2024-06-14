@@ -1,5 +1,5 @@
 # Markr - Marking as a Service with Redis
-> **Note:** I completed the solution by combining my knowledge of Python, Flask, Docker, and what I remembered about Redis with additional insights and assistance from GPT-4 and Copilot. The intention of this was to allow me to quickly validate ideas, get back up to speed fairly quickly, and ensure I was following best practices. I hope this is ok. I’m happy to walk through the code and decisions made, demonstrating my understanding and how I effectively used GPT-4 as a supplementary resource. 
+> **Note:** I completed the solution by combining my knowledge of Python, Flask, Docker, and what I remembered about Redis with additional insights and assistance from GPT-4 and Copilot. The intention of this was to allow me to quickly validate ideas, get back up to speed fairly quickly, and ensure I was following best practices. I’m happy to walk through the code and decisions made, demonstrating my understanding and how I effectively used GPT-4 and Copilot as a supplementary resource. 
 
 ## Overview
 This project is a prototype for Markr, a data ingestion and processing microservice for analyzing student performance on multiple-choice exams. It uses Redis for storing and retrieving data. The project is split into two services:
@@ -61,6 +61,50 @@ Two separate microservices have been created in distinct containers to enhance f
   curl http://localhost:5002/results
   ```
 
+### Health Endpoint
+Both the Submission and Retrieval services include a health endpoint to check their status. This endpoint is designed to be compatible with Kubernetes health checks. Yes this is because I care about the DevOps gang. 
+
+**Health Check**
+- **URL:** `/health`
+- **Method:** GET
+- **Description:** Returns a status indicating the service is running.
+- **Example:**
+
+To check the health of the Submission service:
+
+```bash
+curl http://localhost:5001/health
+```
+To check the health of the Retrieval service:
+
+```bash
+curl http://localhost:5002/health
+```
+**Response:**
+```text
+{"status":"UP"}
+```
+
+### Kubernetes Health Check Configuration
+In your Kubernetes deployment configuration, you can use the following settings to configure liveness and readiness probes for the services:
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /health
+    port: 5001  # 5001 for retrieval service
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 5002  # 5002 for retrieval service
+  initialDelaySeconds: 5
+  periodSeconds: 10
+```
+This should enable the Kubernetes sercice to have an idea of when services are up, we can update the detail of health checks later.
+
 ## Running Tests
 
 To run the tests, use Docker Compose:
@@ -70,6 +114,7 @@ docker-compose up --build tests
 ```
 
 This will build the testing container, run the tests, and display the results in your terminal.
+
 
 ## File Descriptions
 - `submission_service/app/__init__.py`: Initializes the Flask application for the submission service.

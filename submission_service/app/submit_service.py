@@ -65,4 +65,5 @@ def import_data():
 
 @app.route('/health', methods=['GET'])
 def health_check():
-    return "OK", 200
+    # health check returns something a little more Kube friendly in json format
+    return jsonify(status="UP"), 200
