@@ -137,5 +137,5 @@ This will build the testing container, run the tests, and display the results in
 
 - Provide an auto cleaning service as part of the testing to make sure that the service has no testing data in it for production. 
 - Add a few more instructions and suggested approaches for the DevOps team to how they could roll this out and leverage the test (also would note the test currently leaves testing data)
-- Would clearn up testing that may be more suitable for kube environment, as this testing is hard set to ports, it would still work but end points would need to be updated, so this would need to be documented. 
+- Would clearn up testing that may be more suitable for kube environment, as this testing is hard set end points, it would still work but end points would need to be updated, so this would need to be documented. 
 - Would do more commits to branches and work from them rather than the very bad practice of working from trunk. 
