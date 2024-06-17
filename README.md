@@ -1,5 +1,4 @@
 # Markr - Marking as a Service with Redis
-> **Note:** I completed the solution by combining my knowledge of Python, Flask, Docker, and what I remembered about Redis with additional insights and assistance from GPT-4 and Copilot. The intention of this was to allow me to quickly validate ideas, get back up to speed fairly quickly, and ensure I was following best practices. I’m happy to walk through the code and decisions made, demonstrating my understanding and how I effectively used GPT-4 and Copilot as a supplementary resource. 
 
 ## Overview
 This project is a prototype for Markr, a data ingestion and processing microservice for analyzing student performance on multiple-choice exams. It uses Redis for storing and retrieving data. The project is split into two services:
@@ -131,5 +130,11 @@ This will build the testing container, run the tests, and display the results in
 ## Tips for Scaling
 - **Horizontal Scaling**: Deploy multiple instances of the submission and retrieval services using a container orchestration tool like Kubernetes. Use a Redis cluster to handle increased data and request loads.
 - **Persistence**: Configure Redis to use persistence options like RDB snapshots or AOF logs to ensure data is saved to disk.
-- **Monitoring**: Use monitoring tools like Prometheus and Grafana to monitor the health and performance of the application and Redis instances.
+- **Monitoring**: Use monitoring tools like [Prometheus](https://prometheus.io) and [Grafana](https://grafana.com) to monitor the health and performance of the application and Redis instances.
 - **Caching**: Implement caching strategies to reduce load on Redis and improve response times for frequently accessed data.
+
+## Things I would do next / differently
+
+- Provide an auto cleaning service as part of the testing to make sure that the service has no testing data in it for production. 
+- Add a few more instructions and suggested approaches for the DevOps team to how they could roll this out and leverage the test (also would note the test currently leaves testing data)
+- Would do more commits to branches and work from them rather than the very bad practice of working from trunk. 
